@@ -101,7 +101,7 @@ systemd-python==234
 texttable==1.6.2
 # ubuntu-advantage-tools==27.11.3
 # ubuntu-drivers-common==0.0.0
-ufw==0.36
+# ufw==0.36
 unattended-upgrades==0.1
 urllib3==1.25.8
 usb-creator==0.3.7
