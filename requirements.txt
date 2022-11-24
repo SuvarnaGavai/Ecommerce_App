@@ -17,7 +17,7 @@ colorama==0.4.5
 cryptography==38.0.1
 # cupshelpers==1.0
 dbus-python==1.2.16
-defer==1.0.6
+# defer==1.0.6
 distlib==0.3.0
 distro==1.4.0
 distro-info===0.23ubuntu1
