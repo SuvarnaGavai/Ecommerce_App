@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block navblock %}Email Template{% endblock navblock %}
+<!-- Main content -->
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <form method="POST" action="/customadmin/updateEmail/{{emailForm.instance.id}}">
+            {% csrf_token %}
+            {{ emailForm.media }}
+            {{ emailForm.as_p }}
+            <button type="submit">Save changes</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,194 @@
+{% load static %}
+{% block content %}
+<section class="content">
+    <html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <link rel="stylesheet" type="text/css"
+            href="/static/admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+        <link href="{% static 'eshop/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'eshop/css/font-awesome.min.css' %}" rel="stylesheet">
+        <link href="{% static 'eshop/css/prettyPhoto.css' %}" rel="stylesheet">
+        <link href="{% static 'eshop/css/price-range.css' %}" rel="stylesheet">
+        <link href="{% static 'eshop/css/animate.css' %}" rel="stylesheet">
+        <link href="{% static 'eshop/css/main.css' %}" rel="stylesheet">
+        <link href="{% static 'eshop/css/responsive.css' %}" rel="stylesheet">
+    </head>
+
+    <body>
+        <header id="header">
+            <!--header-->
+            <div class="header_top" style="background-color: black;"><!--header_top-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="contactinfo">
+                                <ul class="nav nav-pills">
+                                    <li><a href="#" style='color: white;'><i class="fa fa-phone" ></i> +91 {{mobile.configuration_value}}</a></li>
+								<li><a href="#" style='color: white;'><i class="fa fa-envelope"></i> {{email.configuration_value}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="social-icons pull-right">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="#" style="color: white;"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" style="color: white;"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" style="color: white;"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a href="#" style="color: white;"><i class="fa fa-dribbble"></i></a></li>
+                                    <li><a href="#" style="color: white;"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="/eshop/logout" style="color: white;"><i class="fa">Logout</i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/header_top-->
+    
+            <div class="header-middle">
+                <!--header-middle-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="logo pull-left">
+                                <a href="index1.html"><img src="eshop/images/home/logo.png" alt="" /></a>
+                            </div>
+                            
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="shop-menu pull-right">
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown" ><a href="#"><i class="fa fa-user">Account</i></a>
+                                        <ul role="menu" class="sub-menu">
+                                            <li><a href="/eshop/user-profile" style="background-color:unset">Manage Profile</a></li>
+                                            <li><a href="/eshop/user-address"style="background-color:unset">Manage Address</a></li>
+                                            <li><a href="/eshop/change-password-page"style="background-color:unset">Change Password</a></li><br>
+                                            <li><a href="/eshop/cart/"style="background-color:unset">My Orders</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="/eshop/wishlist"><i class="fa fa-star"></i> Wishlist</a></li>
+                                    <li><a href="/eshop/checkout"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                                    <li><a href="/eshop/cart/"><i class="fa fa-shopping-cart"></i> Cart <span
+                                                class="dot">{{cartItemCount}}</span></li>
+                                    
+                                    <li><a href="/eshop/login" class="active"><i class="fa fa-lock"></i> Login</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/header-middle-->
+    
+            <div class="header-bottom">
+                <!--header-bottom-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target=".navbar-collapse">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div class="mainmenu pull-left">
+                                <ul class="nav navbar-nav collapse navbar-collapse">
+                                    <li><a href="/eshop/" class="active">Home</a></li>
+                                    <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                                        <ul role="menu" class="sub-menu">
+                                            <li><a href="/eshop/shop">Products</a></li>
+                                            <li><a href="/eshop/product_details">Product Details</a></li>
+                                            <li><a href="/eshop/checkout">Checkout</a></li>
+                                            <li><a href="/eshop/cart/">Cart</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                                        <ul role="menu" class="sub-menu">
+                                            <li><a href="/eshop/blog">Blog List</a></li>
+                                            <li><a href="/eshop/blog_single">Blog Single</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <li><a href="/eshop/contactus">Contact</a></li>
+                                    <li class="dropdown"><a href="#">Extras<i class="fa fa-angle-down"></i></a>
+                                        <ul role="menu" class="sub-menu">
+                                            {% for item in cms %}
+                                            <li><a href="{{item.url}}">{{item.title}}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="search_box pull-right">
+                                <input type="text" placeholder="Search" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/header-bottom-->
+        
+        <div class="rows">
+            <a href="/eshop/add-address/">
+                <div class="col-sm-3">
+                    <div class="card" style="width: 300px;height: 300px;margin-top: 5px;">
+                        <div style="vertical-align: middle;text-align: center;">
+                            <h2 style="text-align: center;">Add Address</h2>
+                            <h1 style="color: cornflowerblue;text-align: center;font-size: 10vh;">+</h1>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% for address in addressList %}
+            <div class="col-sm-3">
+                <div class="card" style="width: 300px;height: 300px;margin-top: 5px;">
+                    {% if address.is_default %}
+                    <h3 style="text-align: center;">Default</h3>
+                    {% else %}
+                    <h3 style="text-align: center;">&nbsp;</h3>
+                    {% endif %}
+                    <hr class="solid">
+                    <div style="padding-left: 10px;">
+                        <h4>{{address.address1}}</h4>
+                        <h4>{{address.address2}}</h4>
+                        <h4>{{address.city}}</h4>
+                        <h4>{{address.state}}</h4>
+                        <h4>{{address.country}}</h4>
+                        <h4>{{address.zipcode}}</h4>
+                    </div>
+                    <hr class="solid" style="margin: unset;">
+                    <div
+                        style="display: flex;justify-content: space-between;margin-top: 10px;margin-left: 10px;margin-right: 10px;">
+
+                        <a href="/eshop/edit-address/{{ address.id }}" style="color:white; background: green" class="btn btn-default">Edit</a>
+
+                        <!-- <a href="/eshop/edit-address/{{ address.id }}"
+                            style="margin: 2px;padding: 5px;color: white;border: none;background: green;"><span
+                            class="btn btn-default"></span></a> -->
+
+                        {% if address.is_default %}
+                        {% else %}
+                            <a href="/eshop/set-default-address/{{ address.id }}" style="color:white; background:gray" class="btn btn-default ">Default</a>
+                        {% endif %}
+                        <a href="/eshop/delete-address/{{ address.id }}" style="color:white; background: red" class="btn btn-default ">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </body>
+
+    </html>
+</section>
+{% endblock content %}

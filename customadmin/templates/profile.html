@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block navblock %}Users{% endblock navblock %}
+{% load crispy_forms_tags %}
+<!-- Main content -->
+{% block content %}
+<section class="content">
+    <div class="card">
+        <div class="card-body table-responsive">
+            <div class="container-fluid">
+                <form method="POST" action="/customadmin/profile/">
+                    {% csrf_token %}
+                    {{ profile|crispy }}
+                    <button type="submit" id="save" 
+                        class="btn btn-success">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

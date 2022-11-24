@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+{% block navblock %}User{% endblock navblock %}
+
+{% block content %}
+<section class="content">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message: </strong> {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">✕</button>
+    </div>
+    {% endfor %}
+    <h3>USERS</h3>
+    <div class="card">
+        <div class="card-body table-responsive">
+            <div id="content-main" class="container-fluid">
+                <div class="module filtered" id="changelist">
+                    <div class="row p-12">
+                        <div class="col-md">
+                            <span class="float-sm-left">
+                                <h5>User Table</h5>
+                            </span>
+                            <span class="float-sm-right">
+                                <a href="/customadmin/profile/" class="btn btn-primary btn-sm text-light">
+                                    <i class="fas fa-plus">Add New User</i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                    <hr class="solid">
+                    <link rel="stylesheet" type="text/css"
+                        href="/static/admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="result_list_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <div class="row">
+                                    <div class="actions col-sm-6 col-md-6">
+                                        <label>Show :
+
+                                            <select id="page_size" name="action" onchange="change_page_size(this.value)"
+                                                required="">
+                                                <option value="2">--</option>
+                                                <option value="2">2</option>
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+
+                                            </select>
+                                            <!-- <a href="/customadmin/user/?">5</a> -->
+                                        </label><input type="hidden" name="select_across" value="0"
+                                            class="select-across">
+
+                                        
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div id="result_list_filter" class="dataTables_filter"><label>Search:<input
+                                                    type="search" class="form-control form-control-sm" placeholder=""
+                                                    aria-controls="result_list"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 table-responsive py-4">
+                                        <table id="result_list" class="table table-flush" role="grid"
+                                            aria-describedby="result_list_info">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="result_list"
+                                                        rowspan="1" colspan="1" aria-sort="ascending" aria-label="
+                  
+              : activate to sort column descending" style="width: 36.3281px;">
+                                                        <span><input type="checkbox" id="action-toggle"></span>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="result_list"
+                                                        rowspan="1" colspan="1" aria-label=">
+                 ID
+              : activate to sort column ascending" style="width: 120.125px;">
+                                                        <span>ID</span>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="result_list"
+                                                        rowspan="1" colspan="1" aria-label="
+
+                   Name
+              : activate to sort column ascending" style="width: 120.125px;">
+                                                        <span>Username</span>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="result_list"
+                                                        rowspan="1" colspan="1" aria-label="
+
+                   Image
+              : activate to sort column ascending" style="width: 120.125px;">
+                                                        <span>Email address</span>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="result_list"
+                                                        rowspan="1" colspan="1" aria-label="
+
+                  Sort Id
+              : activate to sort column ascending" style="width: 120.125px;">
+                                                        <span>First Name</span>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="result_list"
+                                                        rowspan="1" colspan="1" aria-label="
+
+                  Created By
+              : activate to sort column ascending" style="width: 120.125px;">
+                                                        <span>Last Name</span>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="result_list"
+                                                        rowspan="1" colspan="1" aria-label="
+
+                  Created Date
+              : activate to sort column ascending" style="width: 120.125px;">
+                                                        <span>is Active</span>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="result_list"
+                                                        rowspan="1" colspan="1" aria-label="
+
+                  Modify By
+              : activate to sort column ascending" style="width: 120.125px;">
+                                                        <span>Date Joined</span>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="result_list"
+                                                        rowspan="1" colspan="1" aria-label="
+
+                 Modify Date
+              : activate to sort column ascending" style="width: 120.125px;">
+                                                        <span>Actions</span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for User in users %}
+                                                <tr class="row1 odd selected" role="row">
+                                                    <td class="action-checkbox sorting_1"><input type="checkbox"
+                                                            name="_selected_action" value="1" class="action-select">
+                                                    </td>
+                                                    <td class="field-id">{{ User.id }}</td>
+                                                    <th class="field-name"><a
+                                                            href="/admin/auth/banner/">{{User.username}}</a></th>
+                                                    <td class="field-id">{{ User.email }}</td>
+                                                    <td class="field-id">{{ User.first_name }}</td>
+                                                    <td class="field-created_by">{{ User.last_name }}</td>
+                                                    <td class="field-created_date">{{ User.is_active }}</td>
+                                                    <td class="field-modify_by">{{ User.date_joined }}</td>
+
+
+                                                    <td>
+                                                        <a href="/customadmin/edit/{{ User.id }}"
+                                                            style="margin: 2px;padding: 5px;color: white;border: none;background: green;"><span
+                                                                class="fas fa-pencil-alt"></span></a>
+                                                        <a data-toggle="modal" data-target="#exampleModalCenter{{ User.id }}"
+                                                            style="margin: 2px;padding: 5px;color: white;border: none;background: red;"><span
+                                                                class="far fa-trash-alt"></span></a>
+                                                    </td>
+                                                </tr>
+                                                <div class="modal fade" id="exampleModalCenter{{ User.id }}" tabindex="-1"
+                                                    role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">Modal
+                                                                    title</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">Are you sure, you want to delete user
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">No</button>
+                                                                <a href="/customadmin/delete/{{User.id}}"><button type="button"
+                                                                        class="btn btn-primary">Yes</button></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="solid">
+                <div class="row">
+                    <div>
+                        <h5>
+                            Showing {{ users.start_index }}-{{ users.end_index }} of {{ users.paginator.count }}
+                        </h5>
+                    </div>
+                    {% if users.has_other_pages %}
+                    <ul class="pagination" style="margin-left: auto ; margin-right: 0 ;">
+                        {% if users.has_previous %}
+                        <button><a href="?page={{ users.previous_page_number }}">Previous</a></button>
+                        {% else %}
+                        <li class="disabled"><button>Previous</span></button></li>
+                        {% endif %}
+
+                        <li style="background-color: rgb(7, 70, 241);height: auto;width: 30px;text-align: center;">
+                            <a>
+                                {{users.number}}</a>
+                        </li>
+
+                        {% if users.has_next %}
+                        <button><a href="?page={{ users.next_page_number }}">Next</a></button>
+                        {% else %}
+                        <li class="disabled"><button>Next</button></li>
+                        {% endif %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function change_page_size() {
+            var e = document.getElementById("page_size");
+            window.location.replace("/customadmin/user/" + e.value);
+        }
+        $(document).ready(function () {
+            // messages timeout for 10 sec
+            setTimeout(function () {
+                $('.alert').fadeOut('slow');
+            }, 1000); // <-- time in milliseconds, 1000 =  1 sec
+        });
+    </script>
+</section>
+
+{% endblock content %}

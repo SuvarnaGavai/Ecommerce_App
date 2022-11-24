@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+{% block navblock %}View Contact{% endblock navblock %}
+
+<html>
+
+<head>
+</head>
+
+<body>
+    {% block content %}
+    <section class="content">
+        <div class="rows form-row spacer">
+            <div class="col-sm-6">
+                <h4><i class="fa fa-shopping-cart"></i> Order Details</h4>
+                <hr class="solid">
+            </div>
+            <div class="col-sm-6">
+                <h4><i class="fas fa-user-alt"></i> Customer Details</h4>
+                <hr class="solid">
+            </div>
+            <div class="col-sm-6">
+                <i class="fas fa-calendar" style="padding-right: 10px;"></i> {{order.created_date}}
+                <hr class="solid">
+            </div>
+            <div class="col-sm-6">
+                <i class="fas fa-user-alt" style="padding-right: 10px;"></i> {{order.userId.first_name}}  {{order.userId.last_name}}
+                <hr class="solid">
+            </div>
+            <div class="col-sm-6">
+                <i class="fa fa-credit-card" style="padding-right: 10px;"></i> {{order.shipping_method}}
+                <hr class="solid">
+            </div>
+            <div class="col-sm-6">
+                <i class="fa fa-envelope" style="padding-right: 10px;"></i> {{order.userId.email}}
+                <hr class="solid">
+            </div>
+            <div class="col-sm-6">
+                <i class="fas fa-shipping-fast" style="padding-right: 10px;"></i> FREE
+                <hr class="solid">
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body table-responsive">
+                <div id="content-main" class="container-fluid">
+                    <div class="module filtered" id="changelist">
+                        <div class="row">
+                            <div class="col-md">
+                                <span class="float-sm-left">
+                                    <h3>Order(#{{order.id}})</h3>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- <hr class="solid"> -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Payment Address</th>
+                                            <th>Shipping Address</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="col-sm-6">
+                                                <h6>{{order.shipping_address.address1}}</h6>
+                                                <h6>{{order.shipping_address.address2}}</h6>
+                                                <h6>{{order.shipping_address.city}}</h6>
+                                                <h6>{{order.shipping_address.state}}</h6>
+                                                <h6>{{order.shipping_address.country}}</h6>
+                                                <h6>{{order.shipping_address.zipcode}}</h6>
+                                            </td>
+                                            <td class="col-sm-6">
+                                                <h6>{{order.shipping_address.address1}}</h6>
+                                                <h6>{{order.shipping_address.address2}}</h6>
+                                                <h6>{{order.shipping_address.city}}</h6>
+                                                <h6>{{order.shipping_address.state}}</h6>
+                                                <h6>{{order.shipping_address.country}}</h6>
+                                                <h6>{{order.shipping_address.zipcode}}</h6>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+
+                                <hr class="solid" >
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Quntity</th>
+                                            <th>Unit Price</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in orderDetails%}
+                                        <tr>
+                                            <td class="col-sm-6">
+                                                <h6>{{item.productId.name}}</h6>
+                                            </td>
+                                            <td class="col-sm-2">
+                                                <h6>{{item.quantity}} </h6>
+                                            </td>
+                                            <td class="col-sm-2">
+                                                <h6>{{item.productId.price}} </h6>
+                                            </td>
+                                            <td class="col-sm-2">
+                                                <h6>{{item.total}}</h6>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        <tr>
+                                            <td class="col-sm-6">
+                                                <!-- <h6>Lorem </h6> -->
+                                            </td>
+                                            <td class="col-sm-2">
+                                                <!-- <h6>Lorem</h6> -->
+                                            </td>
+                                            <td class="col-sm-2">
+                                                <h6>Sub-Total</h6>
+                                            </td>
+                                            <td class="col-sm-2">
+                                                <h6>{{order.grand_total}}</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-sm-6">
+                                            </td>
+                                            <td class="col-sm-2">
+                                            </td>
+                                            <td class="col-sm-2">
+                                                <h6>Flat Shipping Rate</h6>
+                                            </td>
+                                            <td class="col-sm-2">
+                                                <h6>0.00</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-sm-6">
+                                            </td>
+                                            <td class="col-sm-2">
+                                            </td>
+                                            <td class="col-sm-2">
+                                                <h6>Total</h6>
+                                            </td>
+                                            <td class="col-sm-2">
+                                                <h6>{{order.grand_total}}</h6>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    {% endblock content %}
+</body>
+
+
+</html>

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-12">
+    <h4 class="navbar navbar-dark bg-primary">Enter Records</h4>
+    <form method="POST" class="post-form" enctype="multipart/form-data" action="/customadmin/addcms/">
+        {% csrf_token %}
+        <div class="container">
+            <title>flatpage.title</title>
+
+            {% load flatpages %}
+            <div class="container">
+                {{flatpage.content}}
+            </div>
+
+            <div>
+                {{formk.media}}
+                {{formk.as_p}}
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-1 col-form-label"></label>
+                <div class="col-sm-4">
+                    <button type="submit" class="btn btn-success btn-lg">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock content %}

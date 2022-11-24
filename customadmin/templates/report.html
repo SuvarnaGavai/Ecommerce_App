@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block navblock %}Report{% endblock navblock %}
+<html>
+
+<head>
+
+</head>
+
+<body>
+    {% block content %}
+    <section class="content">
+        <div class="card-header">
+            <h2>Report</h2>
+        </div>
+        <div class="card">
+            <div class="actions col-sm-12">
+                <i class="nav-icon fas fa-gifts">Choose the report type</i>
+                <div>
+                    <hr class="solid">
+                    <label><select name="action" required="">
+                            <!-- <option value="" selected=""></option> -->
+                            <option value="delete_selected" selected="">Sales Report</option>
+                            <option value="delete_selected">Customer Register Report</option>
+                            <option value="delete_selected">Customer Order Report</option>
+                            <option value="delete_selected">Coupons Report</option>
+                        </select></label><input type="hidden" name="select_across" value="0" class="select-across">
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dt-buttons btn-group flex-wrap">
+                            <a href="">
+                                <button class="btn btn-secondary buttons-copy buttons-html5" tabindex="0"
+                                    aria-controls="example1" type="button"><span>Copy</span>
+                                </button>
+                            </a>
+                            <a href="/customadmin/generate-csv">
+                                <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0"
+                                    aria-controls="example1" type="button"><span>CSV</span>
+                                </button>
+                            </a>
+                            <a href="">
+                                <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0"
+                                    aria-controls="example1" type="button"><span>Excel</span>
+                                </button>
+                            </a>
+                            <a href="">
+                                <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0"
+                                    aria-controls="example1" type="button" id="pdf"><span>PDF</span>
+                                </button>
+                            </a>
+                            <a href="">
+                                <button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="example1"
+                                    type="button"><span>Print</span>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="example1_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
+                    </div>
+                </div>
+                <div id="customers">
+                    <table id="tableId" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>No.Orders</th>
+                                <th>Total</th>
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for orderData in userOrderData %}
+                            <tr>
+                                <td>{{orderData.Email}}</td>
+                                <td>{{orderData.ourderCount}}</td>
+                                <td>{{orderData.total}}</td>
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <script type="text/javascript">
+            $("body").on("click", "#pdf", function () {
+                html2canvas($('#tableId')[0], {
+                    onrendered: function (canvas) {
+                        var data = canvas.toDataURL();
+                        var docDefinition = {
+                            content: [{
+                                image: data,
+                                width: 500
+                            }]
+                        };
+                        pdfMake.createPdf(docDefinition).download("customer-details.pdf");
+                    }
+                });
+            });
+        </script>
+
+    </section>
+    {% endblock content %}
+</body>
+
+</html>

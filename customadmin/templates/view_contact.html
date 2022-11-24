@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block navblock %}View Contact{% endblock navblock %}
+{% block content %}
+<html>
+
+<head>
+    <Title>
+        Contact Us
+    </Title>
+
+    <style>
+        div {
+            padding-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+
+        <h4> Name : {{contact.name}} </h4>
+        <h4> Email : {{contact.email}} </h4>
+        <h4> Subject : {{contact.subject}} </h4>
+        <h4> Message : {{contact.message}} </h4>
+
+        <form method="POST" action="/customadmin/send-mail/{{contact.id}}">
+            {% csrf_token %}
+            <p style="margin-top:2.3em">
+            <h5>Note Admin:</h5>
+            <textarea name="paragraph_text"  cols="100" rows="10"></textarea>
+            </p>
+                <button style="background-color: blue;" type="submit" >Send</button>
+        </form>
+        <button type="button">Cancel</button>
+
+    </div>
+</body>
+
+</html>
+{% endblock %}

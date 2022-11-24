@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% block navblock %}Category{% endblock navblock %}
+
+{% block content %}
+<section class="content">
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <strong>Message: </strong> {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">✕</button>
+  </div>
+  {% endfor %}
+  <h3>CATEGORY</h3>
+  <div class="card">
+    <div class="card-body table-responsive">
+      <div id="content-main" class="container-fluid">
+        <div class="module filtered" id="changelist">
+          <div class="row p-12">
+            <div class="col-md">
+              <span class="float-sm-left">
+                <h5>Category Table</h5>
+              </span>
+              <span class="float-sm-right">
+                <a href="/customadmin/addcategory" class="btn btn-primary btn-sm text-light">
+                  <i class="fas fa-plus">Add New Category</i>
+                </a>
+              </span>
+            </div>
+          </div>
+          <hr class="solid">
+          <link rel="stylesheet" type="text/css"
+            href="/static/admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+          <div class="row">
+            <div class="col-12">
+              <div id="result_list_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                  <div class="actions col-sm-6 col-md-6">
+                    <label>Show :
+                      <!-- <li class="dropdown nav navbar-nav" ><a href="#"></a>
+                              <ul role="menu" class="sub-menu">
+                                  <li><a href="" style="background-color:unset">2</a></li>
+                                  <li><a href="" style="background-color:unset">5</a></li>
+                                  <li><a href="" style="background-color:unset">10</a></li><br>
+                                  <li><a href="" style="background-color:unset">25</a></li>
+                              </ul>
+                          </li> -->
+                      <select id="page_size" name="action" onchange="change_page_size(this.value)" required="">
+                        <option value="2">--</option>
+                        <option value="2">2</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+
+                      </select>
+                      <!-- <a href="/customadmin/user/?">5</a> -->
+                    </label><input type="hidden" name="select_across" value="0" class="select-across">
+
+                    <!-- <span class="action-counter" data-actions-icnt="1" style="display: inline;">1 of
+                          1
+                          selected</span> -->
+                  </div>
+                  <div class="col-sm-12 col-md-6">
+                    <div id="result_list_filter" class="dataTables_filter"><label>Search:<input type="search"
+                          class="form-control form-control-sm" placeholder="" aria-controls="result_list"></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <table id="result_list" class="table table-hover table-striped table-head-fixed dataTable" role="grid"
+                    aria-describedby="result_list_info">
+                    <thead>
+                      <tr role="row">
+                        <th class="sorting_asc" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1"
+                          aria-sort="ascending" aria-label="
+                  
+              : activate to sort column descending" style="width: 36.3281px;">
+                          <span><input type="checkbox" id="action-toggle"></span>
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1" aria-label=">
+                 ID
+              : activate to sort column ascending" style="width: 120.125px;">
+                          <span>ID</span>
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1" aria-label="
+
+                   Name
+              : activate to sort column ascending" style="width: 120.125px;">
+                          <span>Name</span>
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1" aria-label="
+
+                   Image
+              : activate to sort column ascending" style="width: 120.125px;">
+                          <span>Created By</span>
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1" aria-label="
+
+                  Sort Id
+              : activate to sort column ascending" style="width: 120.125px;">
+                          <span>Created Date</span>
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1" aria-label="
+
+                  Created By
+              : activate to sort column ascending" style="width: 120.125px;">
+                          <span>Modify By</span>
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1" aria-label="
+
+                  Created Date
+              : activate to sort column ascending" style="width: 120.125px;">
+                          <span>Modify Date</span>
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1" aria-label="
+
+
+              : activate to sort column ascending" style="width: 120.938px;">
+                          <span>Actions</span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for category in categories %}
+                      <tr class="row1 odd selected" role="row">
+                        <td class="action-checkbox sorting_1"><input type="checkbox" name="_selected_action" value="1"
+                            class="action-select"></td>
+                        <td class="field-id">{{ category.id }}</td>
+                        <th class="field-name"><a href="/admin/auth/category/">{{ category.name }}</a>
+                        </th>
+                        <td class="field-id">{{ category.created_by }}</td>
+                        <td class="field-id">{{ category.created_date }}</td>
+                        <td class="field-created_by">{{ category.modify_by }}</td>
+                        <td class="field-created_date">{{ category.modify_date }}</td>
+
+                        <td>
+                          <a href="/customadmin/editcategory/{{ category.id }}"
+                            style="margin: 2px;padding: 5px;color: white;border: none;background: green;"><span
+                              class="fas fa-pencil-alt"></span></a>
+
+                          <a data-toggle="modal" data-target="#exampleModalCenter{{ category.id }}"
+                            style="margin: 2px;padding: 5px;color: white;border: none;background: red;"><span
+                              class="far fa-trash-alt"></span></a>
+                          <!-- <a href="/customadmin/deletecategory/{{ category.id }}"
+                            style="margin: 2px;padding: 5px;color: white;border: none;background: red;"><span
+                              class="far fa-trash-alt"></span></a> -->
+                        </td>
+                      </tr>
+                      <div class="modal fade" id="exampleModalCenter{{ category.id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">Are you sure, you want to delete user
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                              <a href="/customadmin/deletecategory/{{ category.id }}"><button type="button"
+                                  class="btn btn-primary">Yes</button></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+                    </tbody>
+
+                  </table>
+                </div>
+              </div>
+              <div class="row"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="solid">
+    <div class="row">
+      <div>
+        <h5>
+          Showing {{ categories.start_index }}-{{ categories.end_index }} of {{ categories.paginator.count }}
+        </h5>
+      </div>
+      {% if categories.has_other_pages %}
+      <ul class="pagination" style="margin-left: auto ; margin-right: 0 ;">
+        {% if categories.has_previous %}
+        <button><a href="?page={{ categories.previous_page_number }}">Previous</a></button>
+        {% else %}
+        <li class="disabled"><button>Previous</span></button></li>
+        {% endif %}
+
+        <li style="background-color: rgb(7, 70, 241);height: auto;width: 30px;text-align: center;">
+          <a>
+            {{categories.number}}</a>
+        </li>
+
+        {% if categories.has_next %}
+        <button><a href="?page={{ categories.next_page_number }}">Next</a></button>
+        {% else %}
+        <li class="disabled"><button>Next</button></li>
+        {% endif %}
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+  </div>
+
+  <script>
+    function change_page_size() {
+      var e = document.getElementById("page_size");
+      window.location.replace("/customadmin/category/" + e.value);
+    }
+    $(document).ready(function () {
+      // messages timeout for 10 sec
+      setTimeout(function () {
+        $('.alert').fadeOut('slow');
+      }, 1000); // <-- time in milliseconds, 1000 =  1 sec
+    });
+  </script>
+</section>
+
+{% endblock content %}

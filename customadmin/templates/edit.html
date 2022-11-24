@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<section class="content">
+    <form method="POST" action="/customadmin/update/{{userform.instance.id}}">
+        {% csrf_token %}
+        {{userform|crispy }}
+        <button type="submit">Save changes</button>
+    </form>
+</section>
+{% endblock content %}

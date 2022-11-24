@@ -1,0 +1,341 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Checkout | E-Shopper</title>
+    <link href="{% static 'eshop/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'eshop/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'eshop/css/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static 'eshop/css/price-range.css' %}" rel="stylesheet">
+    <link href="{% static 'eshop/css/animate.css' %}" rel="stylesheet">
+	<link href="{% static 'eshop/css/main.css' %}" rel="stylesheet">
+	<link href="{% static 'eshop/css/responsive.css' %}" rel="stylesheet">
+	<!-- <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD&disable-funding=card&intent=authorize"></script> -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="{% static 'eshop/images/ico/favicon.ico' %}">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+		href="{% static 'eshop/images/ico/apple-touch-icon-144-precomposed.png' %}">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114"
+		href="{% static 'eshop/images/ico/apple-touch-icon-114-precomposed.png' %}">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+		href="{% static 'eshop/images/ico/apple-touch-icon-72-precomposed.png' %}">
+	<link rel="apple-touch-icon-precomposed" href="{% static 'eshop/images/ico/apple-touch-icon-57-precomposed.png' %}">
+</head>
+
+<body>
+	<header id="header"><!--header-->
+		<div class="header_top" style = 'background-color: rgb(31, 31, 29)'><!--header_top-->
+			<div class="container">
+				<div class="row" >
+					<div class="col-sm-6">
+						<div class="contactinfo" >
+							<ul class="nav nav-pills" >
+								<li><a href="#" style='color: white;'><i class="fa fa-phone" ></i> +91 {{mobile.configuration_value}}</a></li>
+								<li><a href="#" style='color: white;'><i class="fa fa-envelope"></i> {{email.configuration_value}}</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="#" style='color: white;'><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#" style='color: white;'><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#" style='color: white;'><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#" style='color: white;'><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#" style='color: white;'><i class="fa fa-google-plus"></i></a></li>
+								{% if is_login %}
+								<li><a href="/eshop/logout" style='color: white;'><i class="fa">Logout</i></a></li>
+								{% endif %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
+		
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="index.html"><img src="images/home/logo.png" alt="" /></a>
+						</div>
+						
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								<li class="dropdown" ><a href="#"><i class="fa fa-user">Account</i></a>
+									<ul role="menu" class="sub-menu">
+										<li><a href="/eshop/user-profile" style="background-color:unset">Manage Profile</a></li>
+										<li><a href="/eshop/user-address"style="background-color:unset">Manage Address</a></li>
+										<li><a href="/eshop/change-password-page"style="background-color:unset">Change Password</a></li><br>
+										<li><a href="/eshop/cart/"style="background-color:unset">My Orders</a></li>
+									</ul>
+								</li>
+								<li><a href="/eshop/wishlist"><i class="fa fa-star"></i> Wishlist<span
+									class="dot">{{ItemCount}}</span></li>
+								<li><a href="/eshop/checkout"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+								<li><a href="/eshop/cart/"><i class="fa fa-shopping-cart"></i> Cart <span
+											class="dot">{{cartItemCount}}</span></li>
+								
+								<li><a href="/eshop/login" class="active"><i class="fa fa-lock"></i> Login</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+	
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="/eshop/" class="active">Home</a></li>
+								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="/eshop/shop">Products</a></li>
+										<li><a href="/eshop/product_details">Product Details</a></li> 
+										<li><a href="/eshop/checkout">Checkout</a></li> 
+										<li><a href="/eshop/cart">Cart</a></li> 
+										<li><a href="/eshop/login">Login</a></li> 
+                                    </ul>
+                                </li> 
+								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="/eshop/blog">Blog List</a></li>
+										<li><a href="/eshop/blog_single">Blog Single</a></li>
+                                    </ul>
+                                </li> 
+								<li><a href="/eshop/contactus">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="search_box pull-right">
+							<input type="text" placeholder="Search"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-bottom-->
+	</header><!--/header-->
+
+	<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="/eshop">Home</a></li>
+				  <li class="active">review-payment</li>
+				</ol>
+			</div><!--/breadcrums-->
+
+			
+
+			<div class="shopper-informations">
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="shopper-info">
+							<p><strong>User Info</strong></p>
+							<form>
+								First Name :<input type="text" name="first name" value="{{user.first_name}}">
+								Last Name : <input type="text" name="last name" value="{{user.last_name}}">
+								Email ID : <input type="text" name="email" value="{{user.email}}">
+								Phone No : <input type="number" name="state" value="{{user.first_name}}">
+							
+							</form>
+							<!-- <a class="btn btn-primary" href="">Get Quotes</a>
+							<a class="btn btn-primary" href="">Continue</a> -->
+						</div>
+					</div>
+
+                    <div class="col-sm-3">
+						<div class="shopper-info">
+							<p><strong>Shipping Address</strong></p>
+							<form>
+								Address1 :<input type="text" name="address1" value="{{address.address1}}">
+								Address2 : <input type="text" name="address2" value="{{address.address2}}">
+								City/Town : <input type="text" name="city" value="{{address.city}}">
+								State/Region : <input type="text" name="state" value="{{address.state}}">
+								Country : <input type="text" name="country" value="{{address.country}}">
+								Zipcode/Postal Code : <input type="number" name="zipcode" value="{{address.zipcode}}">
+							</form>
+							<!-- <a class="btn btn-primary" href="">Get Quotes</a>
+							<a class="btn btn-primary" href="">Continue</a> -->
+						</div>
+					</div>  
+
+					<div class="col-sm-">
+						<div class="bill-to">
+							<div class="form-one">
+								<p><strong>Billing Address</strong></p>
+								<form>
+									Address1 :<input type="text" name="address1" value="{{address.address1}}">
+									Address2 : <input type="text" name="address2" value="{{address.address2}}">
+									City/Town : <input type="text" name="city" value="{{address.city}}">
+									State/Region : <input type="text" name="state" value="{{address.state}}">
+									Country : <input type="text" name="country" value="{{address.country}}">
+									Zipcode/Postal Code : <input type="number" name="zipcode" value="{{address.zipcode}}">	
+								</form>
+							</div>
+
+						</div>
+					</div>
+					<div class="col-sm-4">					
+				</div>
+			</div>
+            <section id="cart_items">
+                <div class="container">
+                    <div class="breadcrumbs">
+                        <ol class="breadcrumb">
+                            <li><a href="#">Home</a></li>
+                            <li class="active">Shopping Cart</li>
+                        </ol>
+                    </div>
+                    <div class="table-responsive cart_info">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr class="cart_menu">
+                                    <td class="image">Item</td>
+                                    <td class="description"></td>
+                                    <td class="price">Price</td>
+                                    <td class="quantity">Quantity</td>
+                                    <td class="total">Total</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for product in products %}
+                                <tr>
+                                    <td class="cart_product">
+                                        <a href=""><img src="../media/{{ product.productId.image }}" class="img-responsive"
+                                            style="width: 100px;height: 100px;" alt="" /></a>
+                                    </td>
+                                    <td class="cart_description">
+                                        <h4><a href="">{{product.productId.name}}</a></h4>
+                                        <p>Web ID: 1089772</p>
+                                    </td>
+                                    <td class="cart_price">
+                                        <p>{{product.productId.price}}</p>
+                                    </td>
+                                    <td class="cart_quantity">
+                                        <div class="cart_quantity_button">
+                                            <a class="cart_quantity_down" href="/eshop/cart-operation/{{product.productId.id}}/cart/remove"> - </a>
+                                            <input class="cart_quantity_input" type="text" name="quantity" value="{{product.quantity}}"
+                                                autocomplete="off" size="2">
+                                            <a class="cart_quantity_up" href="/eshop/cart-operation/{{product.productId.id}}/cart/add"> + </a>
+                                        </div>
+                                    </td>
+                                    <td class="cart_total">
+                                        <p class="cart_total_price">{{product.total}}</p>
+                                    </td>
+                                    <td class="cart_delete">
+                                        <a class="cart_quantity_delete" href="/eshop/remove-from-cart/{{product.id}}"><i class="fa fa-times"></i></a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <!--/#cart_items-->
+        
+			<div class="review-payment col-sm-2">
+				<!-- <a class="btn btn-primary" href="">Confirm Order</a> -->
+                <!-- <div id="paypal-button-container" style="width:500px;height: 40px;"></div> -->
+                <a class="btn btn-primary" href="/eshop/place-order">Paypal</a>
+                <a class="btn btn-primary" href="">Debit or Crdeit Card</a>
+				 <!-- <h2>Review & Payment</h2>  -->
+			</div>
+
+			<!-- <div class="payment-options">
+					<span>
+						<label><input type="checkbox"> Direct Bank Transfer</label>
+					</span>
+					<span>
+						<label><input type="checkbox"> Check Payment</label>
+					</span>
+					<span>
+						<label><input type="checkbox"> Paypal</label>
+					</span>
+			</div> -->
+		
+	</section> <!--/#cart_items-->
+
+	
+
+	<footer id="footer"><!--Footer-->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="companyinfo">
+							<h2><span>e</span>-shopper</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+						</div>
+					</div>
+					
+					</div>
+					<div class="col-sm-3">
+						<div class="address">
+							<img src="images/home/map.png" alt="" />
+							<p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer-bottom" style='background-color: black;'>
+			<div class="container">
+				<div class="row">
+					<p class="pull-left" style='color: white;'>Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
+					<p class="pull-right" style='color: white;'>Designed by <span><a target="_blank"href="http://www.themeum.com">Themeum</a></span></p>
+				</div>
+			</div>
+		</div>
+		
+	</footer><!--/Footer-->
+	
+
+
+	<script src="{% static 'eshop/js/jquery.js' %}"></script>
+	<script src="{% static 'eshop/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'eshop/js/jquery.scrollUp.min.js' %}"></script>
+	<script src="{% static 'eshop/js/price-range.js' %}"></script>
+    <script src="{% static 'eshop/js/jquery.prettyPhoto.js' %}"></script>
+    <script src="{% static 'eshop/js/main.js' %}"></script>
+	<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD&disable-funding=card&intent=authorize"></script>
+	<script>
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+            style: {
+                layout: 'vertical',
+                color:  'gold',
+                shape:  'pill',
+                label:  'pay',
+            }
+
+        }).render('#paypal-button-container');
+    </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block navblock %}Email Template{% endblock navblock %}
+
+{% block content %}
+<section class="content">
+  <div class="card">
+    <div id="content-main" class="container-fluid">
+      <div class="module filtered" id="changelist">
+        <div class="row p-2">
+          <div class="col-md">
+            <span class="float-sm-left">
+              <h5>Email Template Table</h5>
+            </span>
+            <span class="float-sm-right">
+              <a href="/customadmin/addemail" class="btn btn-primary btn-sm text-light">
+                <i class="fas fa-plus">Add New</i>
+              </a>
+            </span>
+          </div>
+        </div>
+        <hr class="solid">
+          <link rel="stylesheet" type="text/css"
+            href="/static/admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+          <div class="row">
+            <div class="col-12">
+                <div class="card-body table-responsive">
+                  <div id="result_list_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                      <div class="actions col-sm-6 col-md-6">
+                        <label>Action: <select name="action" required="">
+                            <option value="" selected="">---------</option>
+                            <option value="delete_selected">Delete selected users</option>
+                          </select></label><input type="hidden" name="select_across" value="0" class="select-across">
+                      </div>
+                      <span class="float-sm-left">
+                        <div class="col-sm-12 col-md-6">
+                            <div id="result_list_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                class="form-control form-control-sm" placeholder="" aria-controls="result_list"></label>
+                            </div>
+                        </div>
+                      </span>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <table id="result_list" class="table table-hover table-striped table-head-fixed dataTable"
+                          role="grid" aria-describedby="result_list_info">
+                          <thead>
+                            <tr role="row">
+                              <th class="sorting_asc" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1"
+                                aria-sort="ascending" aria-label="
+                  
+              : activate to sort column descending" style="width: 36.3281px;">
+                                <span><input type="checkbox" id="action-toggle"></span>
+                              </th>
+                              <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1"
+                                aria-label="
+                  ID
+              : activate to sort column ascending" style="width: 120.125px;">
+                                <span>ID</span>
+                              </th>
+                              <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1"
+                                aria-label="
+
+                   Name
+              : activate to sort column ascending" style="width: 120.125px;">
+                                <span>Title</span>
+                              </th>
+                              <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1"
+                                aria-label="
+
+                  Created By
+              : activate to sort column ascending" style="width: 120.125px;">
+                                <span>Created By</span>
+                              </th>
+                              <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1"
+                                aria-label="
+
+                  Created Date
+              : activate to sort column ascending" style="width: 120.125px;">
+                                <span>Created Date</span>
+                              </th>
+                              <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1"
+                                aria-label="
+
+                  Modify By
+              : activate to sort column ascending" style="width: 120.125px;">
+                                <span>Modify By</span>
+                              </th>
+                              <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1"
+                                aria-label="
+
+                 Modify Date
+              : activate to sort column ascending" style="width: 120.125px;">
+                                <span>Modify Date</span>
+                              </th>
+                              <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1"
+                                aria-label="
+              
+              : activate to sort column ascending" style="width: 120.938px;">
+                                <span>Actions</span>
+                              </th>
+                          </thead>
+                          <tbody>
+                            {% for template in emailtemplates %}
+                            <tr class="row1 odd selected" role="row">
+                              <td class="action-checkbox sorting_1"><input type="checkbox" name="_selected_action"
+                                  value="1" class="action-select"></td>
+                              <td class="field-id">{{ template.id }}</td>
+                              <th class="field-name"><a href="/admin/auth/emailtemplate/">{{ template.title }}</a></th>
+                              <td class="field-created_by">{{ template.created_by }}</td>
+                              <td class="field-created_date">{{ template.created_date }}</td>
+                              <td class="field-modify_by">{{ template.modify_by }}</td>
+                              <td class="field-modify_date">{{ template.modify_date }}</td>
+                              <td>
+                                <a href="/customadmin/editemailtemplate/{{ template.id }}"
+                                  style="margin: 2px;padding: 5px;color: white; border: none; background: green;"><span
+                                    class="fas fa-pencil-alt"></span></a>
+                                <a href="/customadmin/editemailtemplate/{{ template.id }}"
+                                  style="margin: 2px;padding: 5px;color: white; border: noneS; background: red;"><span
+                                    class="far fa-trash-alt"></span></a>
+                              </td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  <div class="row"></div>
+                </div>
+              </div>
+          </div>
+      </div>
+    <hr class="solid">
+    <div class="row" style="margin-left: auto ; margin-right: 0 ;" >
+      {% if emailtemplates.has_other_pages %}
+      <ul class="pagination">
+        {% if emailtemplates.has_previous %}
+        <button><a href="?page={{ emailtemplates.previous_page_number }}">Previous</a></button>
+        {% else %}
+        <li class="disabled"><button>Previous</span></button></li>
+        {% endif %}
+
+        <li style="background-color: rgb(7, 70, 241);height: auto;width: 30px;text-align: center;"><a>
+            {{emailtemplates.number}}</a></li>
+
+        {% if emailtemplates.has_next %}
+        <button><a href="?page={{ emailtemplates.next_page_number }}">Next</a></button>
+        {% else %}
+        <li class="disabled"><button>Next</button></li>
+        {% endif %}
+      </ul>
+      {% endif %}
+    </div>
+    </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% block navblock %}Orders{% endblock navblock %}
+<!-- Main content -->
+{% block content %}
+<section class="content">
+  <div id="content-main" class="container-fluid">
+    <div class="module filtered" id="changelist">
+      <div class="row p-2">
+        <!-- <div class="col-md">
+          <span class="float-sm-left">
+            <a href="/customadmin/add" class="btn btn-primary btn-sm text-light">
+              <i class="fas fa-plus"></i>
+              Add user
+            </a>
+          </span>
+        </div> -->
+      </div>
+      <form id="changelist-form" method="post" novalidate=""><input type="hidden" name="csrfmiddlewaretoken"
+          value="TQRGXFfwZhbP2rpsb31xsJhcEIgJS7Eqxgq9SkAgwI5b9S3gA6rFj2oXEeaS63DA">
+        <link rel="stylesheet" type="text/css"
+          href="/static/admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body table-responsive">
+                <div id="result_list_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                  <div class="row">
+                    <div class="actions col-sm-6 col-md-6">
+                      <label>Show: <select name="action" required="">
+                          <option value="" selected=""></option>
+
+                          <option value="delete_selected">Delete selected users</option> 
+
+                         </select></label><input type="hidden" name="select_across" value="0" class="select-across">
+                      <button type="submit" class="button" title="Run the selected action" name="index"
+                        value="0">Go</button>
+                      <span class="action-counter" data-actions-icnt="1" style="display: inline;">1 of 1
+                        selected</span>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                      <div id="result_list_filter" class="dataTables_filter"><label>Search:<input type="search"
+                            class="form-control form-control-sm" placeholder="" onchange="" aria-controls="result_list"></label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <table id="result_list" class="table table-hover table-striped table-head-fixed dataTable"
+                        role="grid" aria-describedby="result_list_info">
+                        <thead>
+                          <tr role="row">
+                            <th class="sorting_asc" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1"
+                              aria-sort="ascending" aria-label="
+                  
+              : activate to sort column descending" style="width: 100.338px;">
+                              <span><input type="checkbox" id="action-toggle"></span>
+                            </th>
+                             <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1"
+                              aria-label="
+                          
+                 ID
+              : activate to sort column ascending" style="width: 120.938px;">
+                              <span>ID</span>
+                            </th> 
+                            <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1"
+                              aria-label="
+
+                  User
+              : activate to sort column ascending" style="width: 120.938px;">
+                              <span>User ID</span>
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1"
+                              aria-label="
+
+                  Shipping Method
+              : activate to sort column ascending" style="width: 120.938px;">
+                              <span>Shipping Method</span>
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1"
+                              aria-label="
+
+                  Grand Total
+              : activate to sort column ascending" style="width: 120.938px;">
+                              <span>Grand Total</span>
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1"
+                              aria-label="
+
+                  Created Date
+              : activate to sort column ascending" style="width: 120.938px;">
+                              <span>Created Date</span>
+                            </th>
+                            <!-- <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1"
+                              aria-label="
+
+                Status
+              : activate to sort column ascending" style="width: 120.938px;">
+                              <span>Status</span>
+                            </th> -->
+                            <th class="sorting" tabindex="0" aria-controls="result_list" rowspan="1" colspan="1"
+                              aria-label="
+
+                  Action
+              : activate to sort column ascending" style="width: 120.938px;">
+                              <span>Actions</span>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for Order in orders %}
+                          <tr class="row1 odd selected" role="row">
+                            <td class="action-checkbox sorting_1"><input type="checkbox" name="_selected_action"
+                                value="1" class="action-select"></td>
+                            <td class="field-id">{{ Order.id }}</td>
+                            <th class="field-username"><a href="/admin/auth/user/1/change/">{{ Order.userId }}</a></th>
+                            
+                            <td class="field-email">{{ Order.shipping_method }}</td>
+                            <td class="field-first_name">{{ Order.grand_total}}</td>
+                            <td class="field-last_name">{{ Order.created_date }}</td>
+                            <!-- <td class="field-is_active">{{ Order.status }}</td> -->
+                            <td>
+                              <a href="/customadmin/view-order/{{Order.id}}"
+                              style="margin: 2px;padding: 5px;color: white; border: none; background: grey;"><span
+                                class="fas fa-eye"></span></a>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+
+                      </table>
+                    </div>
+                  </div>
+                  <div class="row"></div>
+                </div>
+              </div>
+              <!-- <div class="card-footer text-center">
+                <p class="paginator col-md-12">
+                  1 user
+                </p>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block navblock %}Dashboard{% endblock navblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<section class="content">
+    <div class="card">
+        <div class="card-body table-responsive">
+            <div class="container-fluid">
+                <form method="POST" action="/customadmin/updatecoupon/{{couponform.instance.id}}">
+                    {% csrf_token %}
+                    {{ couponform|crispy }}
+                    <button type="submit">Save changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

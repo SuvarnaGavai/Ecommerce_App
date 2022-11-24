@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+<section class="content">
+    <form method="POST" action="/customadmin/updateproduct/{{productform.instance.id}}">
+        {% csrf_token %}
+        {{ productform|crispy }}
+        {{ formset|crispy }}
+        <!-- {{ formset.management_form }}
+                    <div class="row form-row spacer">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-4">
+                            <label>Attribute Id</label>
+                        </div>
+                        <div class="col-4">
+                            <label>Attribute Value</label>
+                        </div>
+                    </div>
+                    {% for form in formset %}
+                    <div class="row form-row spacer">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group">
+                                {{form.product_attribute_id}}
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group">
+                                {{form.product_attribute_value}}
+                                
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %} -->
+        <button type="submit">Update</button>
+    </form>
+</section>
+{% endblock content %}

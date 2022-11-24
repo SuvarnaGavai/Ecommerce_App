@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block navblock %}Dashboard{% endblock navblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <form method="POST" action="/customadmin/updatecategory/{{categoryform.instance.id}}">
+            {% csrf_token %}
+            {{ categoryform|crispy }}
+            <button type="submit">Save changes</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
